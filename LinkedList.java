@@ -7,7 +7,12 @@ class LinkedList {
         n2.next = n3;
         printLinketList(n1);
         String[] stringArray = {"Make", "Way", "For", "Noddy","oswald","pokemon","beyblade","digimon","transformers"};
+        Node defaultLinkedList = convertStringArrayToNode2(stringArray);
         printLinketList(convertStringArrayToNode2(stringArray));
+        printSelectedNode(defaultLinkedList,2);
+        printLinketList(defaultLinkedList);
+        removeSelectedNode(defaultLinkedList,2);
+        printSelectedNode(defaultLinkedList,2);
     }
     static void printLinketList(Node head){
         int count = 1;
@@ -42,12 +47,48 @@ class LinkedList {
     static Node convertStringArrayToNode2(String stringArray[]) {
         Node head = new Node(stringArray[0]);
         Node nextNode = head;
-        for(int i = 0; i < stringArray.length; i++) {
+        for(int i = 1; i < stringArray.length; i++) {
             Node newNode = new Node(stringArray[i]);
             nextNode.next = newNode;
             nextNode = newNode;
         }
         return head;
+    }
+    static void printSelectedNode(Node input, int n) {
+        Node list = input;
+        if(n<1) {
+            System.out.println("Invalid value");
+        } else {
+            for(int i = 1; i < n; i++) {
+                if(list.next != null) {
+                    list = list.next;
+                }
+                else {
+                    System.out.println("No Node is present");
+                    return;
+                }
+            }
+            System.out.println(list.data);
+        }
+    }
+    static void removeSelectedNode(Node list, int n) {
+        if(n<1) {
+            System.out.println("Invalid value");
+        } else {
+            for(int i = 1; i < n; i++) {
+                if(list.next != null) {
+                    Node prevNode = list;
+                    list = list.next;
+                }
+                else {
+                    System.out.println("No Node is present");
+                    return;
+                }
+            }
+            System.out.println(list.data);
+            System.out.println(prevNode.data);
+            prevNode.next = list;
+        }
     }
 }
 

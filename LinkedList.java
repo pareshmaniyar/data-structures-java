@@ -8,11 +8,12 @@ class LinkedList {
         printLinketList(n1);
         String[] stringArray = {"Make", "Way", "For", "Noddy","oswald","pokemon","beyblade","digimon","transformers"};
         Node defaultLinkedList = convertStringArrayToNode2(stringArray);
-        printLinketList(convertStringArrayToNode2(stringArray));
-        printSelectedNode(defaultLinkedList,2);
+        // printLinketList(convertStringArrayToNode2(stringArray));
         printLinketList(defaultLinkedList);
+        printSelectedNode(defaultLinkedList,2);
         removeSelectedNode(defaultLinkedList,2);
         printSelectedNode(defaultLinkedList,2);
+        printLinketList(defaultLinkedList);
     }
     static void printLinketList(Node head){
         int count = 1;
@@ -68,26 +69,30 @@ class LinkedList {
                     return;
                 }
             }
-            System.out.println(list.data);
+            System.out.println("Data present at "+n+" is " + list.data);
         }
     }
     static void removeSelectedNode(Node list, int n) {
         if(n<1) {
             System.out.println("Invalid value");
         } else {
+            Node currentReference = list;
+            Node previousReference = list;
             for(int i = 1; i < n; i++) {
-                if(list.next != null) {
-                    Node prevNode = list;
-                    list = list.next;
+                if(currentReference.next != null) {
+                    previousReference = currentReference;
+                    currentReference = currentReference.next;
                 }
                 else {
                     System.out.println("No Node is present");
                     return;
                 }
             }
-            System.out.println(list.data);
-            System.out.println(prevNode.data);
-            prevNode.next = list;
+            if(currentReference.next == null)
+                previousReference.next = null;
+            else
+                previousReference.next = currentReference.next;
+            System.out.println("Removing "+n+" Node which contains data "+currentReference.data);
         }
     }
 }

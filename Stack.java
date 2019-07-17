@@ -8,10 +8,10 @@ class StackApplication {
         stack1.push(7);
         stack1.push(2);
         stack1.push(8);
-        System.out.println(stack1.pop());
+        System.out.println("Pop: " + stack1.pop());
         stack1.push(9);
         if(!stack1.isEmpty())
-            System.out.println("Topmost Element on Stack is " + stack1.peek());
+            System.out.println("Peek Topmost Element on Stack is " + stack1.peek());
         printTheWholeStackFromTop(stack1);
         printTheWholeStackFromBottom(stack1);
         StackLinkedList stack2 = new StackLinkedList();
@@ -56,13 +56,13 @@ class StackArray {
     private int head = -1;
     public void push(int i) {
         if(head < 19) {
-            System.out.println(array.length);
+            // System.out.println(array.length + " i: " + i);
             array[++head] = i;
-            System.out.println(array[++head]);
-            // System.out.println("Pushed: "+array[head]);
+            // System.out.println(array[head]);
+            System.out.println("Pushed: "+ array[head]);
         }
         else
-            System.out.println("Stack full");
+            System.out.println("Stack full, will lose data: " + i);
     }
     public int pop() {
         if(head == -1)

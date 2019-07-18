@@ -1,4 +1,5 @@
-class StackApplication {
+// package FirstPackage;
+class Stack {
     public static void main(String args[]) {
         System.out.println("Stack Implementation with arrays");
         StackArray stack1 = new StackArray(20);
@@ -15,12 +16,15 @@ class StackApplication {
         printTheWholeStackFromTop(stack1);
         printTheWholeStackFromBottom(stack1);
         StackLinkedList stack2 = new StackLinkedList();
+        System.out.println("Called");
         stack2.push(0);
         stack2.push(1);
         stack2.push(1);
         stack2.push(2);
         stack2.push(3);
         stack2.push(5);
+        stack2.pop();
+        System.out.println("Called");
     }
     public static void printTheWholeStackFromTop(StackArray currentStack) {
         StackArray storage = new StackArray(currentStack.length());
@@ -84,23 +88,32 @@ class StackArray {
 }
 
 class StackLinkedList {
-    private Node head = new Node(-1);
+    private Node head;
     private Node currentReference;
     public void push(int i) {
         if(head == null) {
-            head.setData(i);
-            currentReference = head;
+            head = new Node(i);
+            System.out.println("Pushed: "+ head.getData());
         } else {
-            while(!(currentReference.next == null)) {
-                System.out.println(currentReference.getData());
-                currentReference = currentReference.next;
-            }
-            currentReference.next = new Node(i);
+            currentReference = new Node(i);
+            currentReference.next = head;
+            head = currentReference;
+            System.out.println("Pushed: "+ head.getData());
         }
     }
-    // public int pop(int i) {}
-    // public boolean isEmpty() {}
-    // public int peek() {}
+    public int pop() {
+        int returnResult;
+        returnResult = head.getData();
+        System.out.println("Pushed: "+ returnResult);
+        head = head.next;
+        return returnResult;
+    }
+    public boolean isEmpty() {
+        return head == null;
+    }
+    public int peek() {
+        return head==null?null:head.getData();
+    }
 }
 class Node {
     private int i;

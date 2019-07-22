@@ -16,15 +16,19 @@ class Stack {
         printTheWholeStackFromTop(stack1);
         printTheWholeStackFromBottom(stack1);
         StackLinkedList stack2 = new StackLinkedList();
-        System.out.println("Called");
+        System.out.println("isEmpty: "+stack2.isEmpty());
         stack2.push(0);
         stack2.push(1);
         stack2.push(1);
         stack2.push(2);
         stack2.push(3);
         stack2.push(5);
+        stack2.push(5);
         stack2.pop();
-        System.out.println("Called");
+        stack2.push(8);
+        System.out.println("peek(): "+stack2.peek());
+        System.out.println("isEmpty: "+stack2.isEmpty());
+        System.out.println("End program");
     }
     public static void printTheWholeStackFromTop(StackArray currentStack) {
         StackArray storage = new StackArray(currentStack.length());
@@ -102,11 +106,14 @@ class StackLinkedList {
         }
     }
     public int pop() {
-        int returnResult;
-        returnResult = head.getData();
-        System.out.println("Pushed: "+ returnResult);
-        head = head.next;
-        return returnResult;
+        if(head!=null) {
+            int returnResult;
+            returnResult = head.getData();
+            System.out.println("Poped: "+ returnResult);
+            head = head.next;
+            return returnResult;
+        } else
+            return -1;
     }
     public boolean isEmpty() {
         return head == null;

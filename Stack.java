@@ -55,15 +55,13 @@ class Stack {
 
 }
 class StackArray {
-    private int size;
     private int array[];
     StackArray(int size) {
-        this.size = size;
         array = new int[size];
     }
     private int head = -1;
     public void push(int i) {
-        if(head < 19) {
+        if(head < array.length - 1) {
             // System.out.println(array.length + " i: " + i);
             array[++head] = i;
             // System.out.println(array[head]);

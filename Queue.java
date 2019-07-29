@@ -1,6 +1,8 @@
 class Queue {
     public static void main(String[] args) {
         System.out.println("Queue implementation: first in last out");
+        {
+        System.out.println("Queue implementation using array");
         QueueArray queue1 = new QueueArray(7);
         System.out.println("queue1.isEmpty(): " + queue1.isEmpty());
         queue1.enqueue('k');
@@ -37,10 +39,31 @@ class Queue {
         System.out.println(queue1.dequeue());
         System.out.println(queue1.dequeue());
         System.out.println(queue1.dequeue());
+        System.out.println(queue1.dequeue());   
         System.out.println(queue1.dequeue());
         System.out.println(queue1.dequeue());
-        System.out.println(queue1.dequeue());
-
+        }
+        {
+        System.out.println("Queue implementation using circular linked list");
+        QueueCircularLinkedList queue2 = new QueueCircularLinkedList();
+        System.out.println("queue2.isEmpty(): " + queue2.isEmpty());
+        queue2.enqueue('t');
+        queue2.enqueue('a');
+        queue2.enqueue('n');
+        queue2.enqueue('g');
+        queue2.enqueue('l');
+        queue2.enqueue('e');
+        queue2.enqueue('d');
+        System.out.println("peak: " + queue2.peek());
+        System.out.println("queue2.isEmpty(): " + queue2.isEmpty());
+        System.out.println(queue2.dequeue());
+        System.out.println(queue2.dequeue());
+        System.out.println(queue2.dequeue());
+        System.out.println(queue2.dequeue());
+        System.out.println(queue2.dequeue());
+        System.out.println(queue2.dequeue());
+        System.out.println(queue2.dequeue());
+        }
     }
 }
 class QueueArray {
@@ -86,7 +109,12 @@ class QueueArray {
         return temp;
     }
     public boolean isEmpty() {
-        return rear == front;
+        if(rear == front) {
+            rear = front = 0;
+            return true;
+        } else {
+            return false;
+        }
     }
     public char peek() {
         if(rear == front) {
@@ -94,4 +122,49 @@ class QueueArray {
         }
         return array1[front];
     }
+}
+
+class QueueCircularLinkedList {
+    Node rear;
+    public void enqueue(char c) {
+        if(rear == null) {
+            rear = new Node(c);
+            System.out.println("Added: " + rear.getData());
+        } else {
+            Node newNode = new Node(c);
+            newNode.next = rear.next;
+            rear.next = newNode;
+            rear = newNode;
+            System.out.println("Added: " + rear.getData());
+        }
+    }
+    public char dequeue() {
+        if(rear == null) {
+            return 'a';
+        } else {
+            char temp = rear.next.getData();
+            rear.next = rear.next.next; 
+            return temp;
+        }
+    }
+    public boolean isEmpty() {
+        return rear == null;
+    }
+    public char peek() {
+        return rear.next.getData();
+    }
+}
+
+class Node {
+    private char c;
+    Node next;
+    public Node(char c) {
+        this.c = c;
+    }
+    public char getData() {
+        return c;
+    }
+    public void setData(char c) {
+        this.c = c;
+    } 
 }
